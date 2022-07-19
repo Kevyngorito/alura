@@ -23,12 +23,30 @@ public class App {
         var parser = new JsonParser();
         List<Map<String, String>> listaDeFilmes = parser.parse(body);
       
+
+    
         // Exibir e manipular os dados
 
         for (Map<String,String> filme : listaDeFilmes) {
+            System.out.println("\u001b[48;2;42;122;228m");
+            System.out.println("\u001b[38;2;255;255;255m");
             System.out.println(filme.get("title"));
+            //Reseta para o padrão (ESC)
+            System.out.println("\u001b[m");
+
+            String imdbRating = filme.get("imDbRating");
+            Double imdbRatingDouble = Double.parseDouble(imdbRating);
+            long roundeRating = Math.round(imdbRatingDouble);
+            System.out.println(roundeRating);
             System.out.println(filme.get("image"));
             System.out.println(filme.get("imDbRating"));
+
+            //Incrementa 1 estrelinha para cada i menor que o rating arredondado
+            for(int i = 0; i < roundeRating; i++) {
+                
+                System.out.print("\u2b50");
+            }
+
             System.out.println();
         }
 
