@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ExtratorDeConteudoDaNasa {
+public class ExtratorDeConteudoDaNasa implements ExtratorDeConteudo {
     public List<Conteudo> extraiConteudos (String json) {
         // Extrair só os dados que interessam (título, poster e classificação)
         var parser = new JsonParser();
@@ -14,7 +14,7 @@ public class ExtratorDeConteudoDaNasa {
             String titulo = atributos.get("title");
             String urlImagem = atributos.get("url");
             new Conteudo(titulo, urlImagem);
-            
+
             Conteudo conteudo = new Conteudo(titulo, urlImagem);
 
             conteudos.add(conteudo);

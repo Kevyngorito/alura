@@ -10,8 +10,13 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         // Fazer uma conexão HTTP  e buscar os top 250 filmes
+        //String url = "https://api.mocki.io/v2/549a5d8b/Top250Movies";
+        //ExtratorDeConteudo extrator = new ExtratorDeConteudoDoIMDB();
+
+
         String url = "https://api.nasa.gov/planetary/apod?api_key=gT4pLJ7bNdmR2cxEuy5LAdRQtO4eauL5YSzMgP70&start_date=2022-06-02&end_date=2022-07-02";
-        
+        ExtratorDeConteudo extrator = new ExtratorDeConteudoDaNasa();
+
         ClienteHttp http = new ClienteHttp();
         String json = http.buscaDados(url);
 
@@ -25,8 +30,7 @@ public class App {
 
          //Instância do new GeradorDeFigurinhas movido para fora do loop, para otimizar memória
         
-        ExtratorDeConteudoDaNasa extrator = new ExtratorDeConteudoDaNasa();
-
+ 
         List<Conteudo> conteudos = extrator.extraiConteudos(json);
 
         GeradorDeFigurinhas geradora = new GeradorDeFigurinhas();
