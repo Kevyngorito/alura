@@ -1,4 +1,6 @@
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -7,10 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 public class App {
+    /**
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
         // Fazer uma conexão HTTP  e buscar os top 250 filmes
-        String url = "https://mocki.io/v1/9a7c1ca9-29b4-4eb3-8306-1adb9d159060";
+        String url = "https://api.mocki.io/v2/549a5d8b/Top250Movies";
         URI endereco = URI.create(url);
         var client = HttpClient.newHttpClient();
         var request = HttpRequest.newBuilder(endereco).GET().build();
@@ -26,27 +32,26 @@ public class App {
 
     
         // Exibir e manipular os dados
+        /* Para cada um dos filmes, pega a URL, pega o título e abre um input Stream
+         *(uma corrente de bits) e a cada loop é criado um novo gerador de figurinhas
+         */
+
+         //Instância do new GeradorDeFigurinhas movido para fora do loop, para otimizar memória
+        GeradorDeFigurinhas geradora = new GeradorDeFigurinhas();
 
         for (Map<String,String> filme : listaDeFilmes) {
-            System.out.println("\u001b[48;2;42;122;228m");
-            System.out.println("\u001b[38;2;255;255;255m");
-            System.out.println(filme.get("title"));
-            //Reseta para o padrão (ESC)
-            System.out.println("\u001b[m");
 
-            String imdbRating = filme.get("imDbRating");
-            Double imdbRatingDouble = Double.parseDouble(imdbRating);
-            long roundeRating = Math.round(imdbRatingDouble);
-            System.out.println(roundeRating);
-            System.out.println(filme.get("image"));
-            System.out.println(filme.get("imDbRating"));
+            String urlImagem = filme.get("image");
+            String titulo = filme.get("title");
 
-            //Incrementa 1 estrelinha para cada i menor que o rating arredondado
-            for(int i = 0; i < roundeRating; i++) {
-                
-                System.out.print("\u2b50");
-            }
+            String nomeArquivo = titulo + ".png";
 
+            InputStream inputStream = new URL(urlImagem).openStream();
+
+            geradora.cria(inputStream, "saida/" + nomeArquivo);
+
+            System.out.println("Criando imagem " + titulo);
+           
             System.out.println();
         }
 
