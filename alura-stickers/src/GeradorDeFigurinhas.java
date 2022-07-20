@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -43,6 +42,7 @@ public class GeradorDeFigurinhas {
         // Escrever frase
 
         graphics.drawString("TOPZERA", 175, novaAltura - 100);
+        
         // Escrever a nova imagem em um arquivo
 
         File directory = new File("saida/");

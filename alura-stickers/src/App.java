@@ -16,7 +16,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         // Fazer uma conexão HTTP  e buscar os top 250 filmes
-        String url = "https://api.mocki.io/v2/549a5d8b/Top250Movies";
+        String url = "https://api.nasa.gov/planetary/apod?api_key=gT4pLJ7bNdmR2cxEuy5LAdRQtO4eauL5YSzMgP70&start_date=2022-06-02&end_date=2022-07-02";
         URI endereco = URI.create(url);
         var client = HttpClient.newHttpClient();
         var request = HttpRequest.newBuilder(endereco).GET().build();
@@ -27,7 +27,7 @@ public class App {
         //Foi utilizado a classe JsonParser para introduzir expressões regulares(REGEX) afim de isolar os dados que interessam, via grupo de captura
 
         var parser = new JsonParser();
-        List<Map<String, String>> listaDeFilmes = parser.parse(body);
+        List<Map<String, String>> listaDeConteudos = parser.parse(body);
       
 
     
@@ -39,21 +39,29 @@ public class App {
          //Instância do new GeradorDeFigurinhas movido para fora do loop, para otimizar memória
         GeradorDeFigurinhas geradora = new GeradorDeFigurinhas();
 
-        for (Map<String,String> filme : listaDeFilmes) {
+    for(int i = 0; i < 50; i++){
 
-            String urlImagem = filme.get("image");
-            String titulo = filme.get("title");
+        
+        Map<String,String> conteudo = listaDeConteudos.get(i); 
 
-            String nomeArquivo = titulo + ".png";
+            String urlImagem = 
+            //conteudo.get("image")
+            conteudo.get("url")
+            .replaceAll("(@+)(.*).jpg$", "$1.jpg");
+
+            String titulo = conteudo.get("title");
 
             InputStream inputStream = new URL(urlImagem).openStream();
 
-            geradora.cria(inputStream, "saida/" + nomeArquivo);
+            String nomeArquivo = "saida/" + titulo + ".png";
+
+            geradora.cria(inputStream, nomeArquivo);
 
             System.out.println("Criando imagem " + titulo);
            
             System.out.println();
         }
-
     }
+
 }
+
