@@ -14,8 +14,12 @@ public class App {
         //ExtratorDeConteudo extrator = new ExtratorDeConteudoDoIMDB();
 
 
-        String url = "https://api.nasa.gov/planetary/apod?api_key=gT4pLJ7bNdmR2cxEuy5LAdRQtO4eauL5YSzMgP70&start_date=2022-06-02&end_date=2022-07-02";
-        ExtratorDeConteudo extrator = new ExtratorDeConteudoDaNasa();
+        //String url = "https://api.nasa.gov/planetary/apod?api_key=gT4pLJ7bNdmR2cxEuy5LAdRQtO4eauL5YSzMgP70&start_date=2022-06-02&end_date=2022-07-02";
+        //ExtratorDeConteudo extrator = new ExtratorDeConteudoDaNasa();
+
+        ExtratorDeConteudo extrator = new ExtratorDeConteudoDoIMDB();
+
+        String url = "http://localhost:8080/linguagens";
 
         ClienteHttp http = new ClienteHttp();
         String json = http.buscaDados(url);

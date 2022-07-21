@@ -41,7 +41,7 @@ public class GeradorDeFigurinhas {
 
         // Escrever frase
 
-        graphics.drawString("TOPZERA", 175, novaAltura - 100);
+        graphics.drawString("TOPZERA", 0, novaAltura - 100);
         
         // Escrever a nova imagem em um arquivo
 
