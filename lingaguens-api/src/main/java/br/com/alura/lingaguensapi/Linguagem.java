@@ -12,17 +12,15 @@ public class Linguagem {
     private String image;
     private int ranking;
 
+   
+
     public Linguagem(String title, String image, int ranking) {
         this.title = title;
         this.image = image;
         this.ranking = ranking;
     }
 
-    Linguagem(){
-        
-    }
-
-    public String getId(){
+    public String getId() {
         return id;
     }
 
@@ -36,6 +34,5 @@ public class Linguagem {
         return ranking;
     }
 
-    
 
 }

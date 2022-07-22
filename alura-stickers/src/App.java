@@ -39,7 +39,7 @@ public class App {
 
         GeradorDeFigurinhas geradora = new GeradorDeFigurinhas();
 
-    for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 10; i++){
 
         
         Conteudo conteudo = conteudos.get(i); 
